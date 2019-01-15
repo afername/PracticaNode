@@ -1,0 +1,19 @@
+{
+  "name": "practica_node",
+  "version": "1.0.0",
+  "description": "Para inicializar el proyecto",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/afername/PracticaNode.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/afername/PracticaNode/issues"
+  },
+  "homepage": "https://github.com/afername/PracticaNode#readme"
+}
