@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/afername/PracticaNode/issues"
   },
-  "homepage": "https://github.com/afername/PracticaNode#readme"
+  "homepage": "https://github.com/afername/PracticaNode#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mongoose": "^5.4.5"
+  }
 }
