@@ -24,11 +24,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 // conecto a base de datos y defino modelo
 var mongoose = require('mongoose');
 var conn = mongoose.connection;
-require('./models/Anuncios');
+require('./models/Anuncio');
 
+//Variables locales de vistas
+app.locals.titulo = 'NodePop';
 
+//rutas de index y users
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
 
 // rutas de nuestro API
 app.use('/apiv1/anuncios', require('./routes/apiv1/anuncios'));

@@ -1,12 +1,22 @@
 #Ejercicio práctica Módulo Node
 
-#Inicializar el proyecto
+##Inicializar el proyecto
 
 Instalar dependencias:
 ```
 npm install
 ```
 
+
+Verifica la cadena de conexión a la base de datos en lib/connectMongoose.js
+
+Puedes utilizar el script de inicialización de la base de datos con:
+
+```shell
+npm run install_db
+```
+
+## Arranque
 Ejecutar la app - Entorno de desarrollo, puerto por defecto (3000):
 ```
 npm start
@@ -33,4 +43,18 @@ npm install --save-dev cross-env
 www"
 },
 ...
+```
+
+## Rutas del API
+
+* http://localhost:3000/apiv1/anuncios
+
+Retorna una lista de anuncios
+
+## Otra información
+
+### Para arrancar un servidor de mongodb desde consola:
+
+```shell
+./bin/mongod --dbpath ./data/db --directoryperdb
 ```

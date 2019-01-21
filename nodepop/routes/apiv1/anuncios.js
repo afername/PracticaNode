@@ -2,7 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
-const Anuncio = require('../../models/Anuncios')
+const Anuncio = require('../../models/Anuncio')
 
 /**GET /anuncios
  * obtener una lista de anuncios

@@ -1,0 +1,19 @@
+// anuncios.json
+{
+"anuncios": [
+{
+"nombre": "Bicicleta",
+"venta": true,
+"precio": 230.15,
+"foto": "bici.jpeg",
+"tags": [ "lifestyle", "motor"]
+},
+{
+"nombre": "iPhone",
+"venta": false,
+"precio": 50.00,
+"foto": "iphone.png",
+"tags": [ "lifestyle", "mobile"]
+}
+]
+}
