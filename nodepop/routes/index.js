@@ -10,7 +10,7 @@ router.get('/', async (req, res, next) => {
         const precio = req.query.precio;
         const foto = req.query.foto;
         const tags = req.query.tags;
-        const pag = parseInt(req.query.pag);
+        const page = parseInt(req.query.pag);
         const sort = req.query.sort;
         const fields = req.query.fields;
 

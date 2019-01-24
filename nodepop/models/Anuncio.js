@@ -11,6 +11,15 @@ const anuncioSchema = mongoose.Schema({
   tags: { type: [String], index: true },
 }, { collection: 'anuncios' });
 
+/**
+ * Listado de anuncios con opciones de filtro
+ * @param {object} filter 
+ * @param {integer} skip 
+ * @param {integer} limit 
+ * @param {string} sort 
+ * @param {string} fields 
+ */
+
 //creo un método estático con el esquema anuncioSchema
 anuncioSchema.statics.listar = (filtro, skip, limit, fields, sort) => {
   const query = Anuncio.find(filtro);

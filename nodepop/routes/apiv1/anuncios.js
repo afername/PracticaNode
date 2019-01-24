@@ -4,62 +4,63 @@ const express = require('express');
 const router = express.Router();
 const { body, validationResult } = require('express-validator/check');
 
-const Ad = require( '../../models/Ad' );
+const Ad = require( '../../models/Anuncio' );
 
 /**
- * Get the ads paginated
+ * carga los anuncios paginados
  */
 router.get('/', async (req, res, next) => {
     try {
-        // Define variables
+        // Definición variables
         const name = req.query.name;
-        const sale = req.query.sale;
+        const venta = req.query.venta;
+        const precio = req.query.precio;
+        const foto = req.query.foto;
         const tags = req.query.tags;
-        const price = req.query.price;
-        const page = parseInt(req.query.page);
+        const page = parseInt(req.query.pag);
         const sort = req.query.sort;
         const fields = req.query.fields;
 
-        const filter = {};
+        const filtro = {};
 
-        // Define the page
+        // Defino pagina
         const limit = 12;
         const skip = page*limit;
 
-        // Define filter for name, check if it contain the word...
+        // Defino filtro de nombre, (contiene)
         if( typeof(name) !== 'undefined' ) {
-            filter.name = new RegExp('^' + name, "i");
+            filtro.name = new RegExp('^' + name, "i");
         }
 
-        // Define filter for sale, check booolean
-        if( typeof(sale) !== 'undefined' ) {
-            filter.sale = sale;
+        // Define filtro compra/venta (booleana)
+        if( typeof(venta) !== 'undefined' ) {
+            filtro.venta = venta;
         }
 
-        // Define filter for tags
+        // Defino filtro de etiquetas
         if( typeof(tags) !== 'undefined' ) {
             // Convert tags string into array
-            filter.tags = {$in: tags.split(/,|\s/)};
+            filtro.tags = {$in: tags.split(/,|\s/)};
         }
 
-        // Define filter for price
+        // Define filtro de precio
         if( typeof(price) !== 'undefined' ) {
-            let priceArray = price.split('-');
-            priceArray = priceArray.map(parseFloat);
+            let precioArray = precio.split('-');
+            precioArray = precioArray.map(parseFloat);
 
-            if( priceArray.length == 1 ) {
-                filter.price = priceArray[0];
-            } else if( !isNaN(priceArray[0]) && !isNaN(priceArray[1]) ) {
-                filter.price = {$gte: priceArray[0], $lte: priceArray[1]};
-            } else if( !isNaN(priceArray[0]) ) {
-                filter.price = {$gte: priceArray[0]};
-            } else if( !isNaN(priceArray[1]) ) {
-                filter.price = {$lte: priceArray[1]};
+            if( precioArray.length == 1 ) {
+                filtro.precio = precioArray[0];
+            } else if( !isNaN(precioArray[0]) && !isNaN(precioArray[1]) ) {
+                filtro.precio = {$gte: precioArray[0], $lte: precioArray[1]};
+            } else if( !isNaN(precioArray[0]) ) {
+                filtro.precio = {$gte: precioArray[0]};
+            } else if( !isNaN(precioArray[1]) ) {
+                filtro.precio = {$lte: precioArray[1]};
             } 
         }
 
-        // Get the docs
-        const docs = await Ad.list(filter, skip, limit, sort, fields);
+        // cargo docs
+        const docs = await Ad.list(filtro, skip, limit, sort, fields);
 
         res.json({success: true, data: docs});
     } catch(err) {
@@ -69,7 +70,7 @@ router.get('/', async (req, res, next) => {
 });
 
 /**
- * Get the tags
+ * Cargo etiquetas
  */
 router.get('/tags', async (req, res, next) => {
     try {
@@ -82,14 +83,14 @@ router.get('/tags', async (req, res, next) => {
 });
 
 /**
- * Get the maximum price
+ * obtengo precio max
  */
-router.get('/max_price', async (req, res, next) => {
+router.get('/max_precio', async (req, res, next) => {
     try {
         const query = Ad.find();
-        query.sort('-price');
+        query.sort('-precio');
         query.limit(1);
-        query.select('price');
+        query.select('precio');
 
         const docs = await query.exec();
         res.json({success: true, data: docs});
@@ -100,37 +101,37 @@ router.get('/max_price', async (req, res, next) => {
 });
 
 /**
- * Insert new ad
+ * Insertar anuncio nuevo
  */
 router.post('/', [
-    body('price').optional().isNumeric().withMessage('must be numeric'),
-    body('sale').optional().isBoolean().withMessage('must be boolean'),
-    body('tags').custom( value => { // check if the tags passed are correct
+    body('precio').optional().isNumeric().withMessage('debe ser numérico'),
+    body('venta').optional().isBoolean().withMessage('debe ser true o false'),
+    body('tags').custom( value => { // comprobación de etiquetas correctas
         return new Promise( (resolve, reject) => {
             Ad.distinct('tags', (err, tags) => {
                 const tagsPassed = value.split(/,|\s/);
                 tagsPassed.forEach(tag => {
                     if(tags.indexOf(tag) == -1) {
-                        return reject(); // it found an incorrect tag
+                        return reject(); // etiqueta incorrecta
                     }
                 });
 
                 return resolve();
             })
         } ) 
-    } ).withMessage('You have added incorrect tags.')
+    } ).withMessage('La etiquetas que has introducido son incorrectas.')
 ], async (req, res, next) => {
     try {
-        // Send the validation result if error
+        // envio error de validación
         validationResult(req).throw();
         const data = req.body;
 
-        // Convert tags passed to array before insert into database
+        // Convierto las etiquetas en array antes de insertar en BD
         data.tags = data.tags.split(/,|\s/);
-        const ad = new Ad(data);
+        const ad = new Anuncio(data);
 
-        // Save the ad into database
-        const doc = await ad.save();
+        // Guardo el anuncio en BD
+        const doc = await anuncio.save();
         res.json({success:true, data: doc});
     } catch(err) {
         next(err);
@@ -139,25 +140,25 @@ router.post('/', [
 });
 
 /**
- * Update an ad by _id
+ * Actualizo/modifico un anuncio por ID 
  */
 router.put('/:id', [
-    body('price').optional().isNumeric().withMessage('must be numeric'),
-    body('sale').optional().isBoolean().withMessage('must be boolean'),
-    body('tags').custom( value => { // check if the tags passed are correct
+    body('precio').optional().isNumeric().withMessage('debe ser numérico'),
+    body('venta').optional().isBoolean().withMessage('debe ser true o false'),
+    body('tags').custom( value => { // comprobar que se pasan etiquetas correctas
         return new Promise( (resolve, reject) => {
             Ad.distinct('tags', (err, tags) => {
                 const tagsPassed = value.split(/,|\s/);
                 tagsPassed.forEach(tag => {
                     if(tags.indexOf(tag) == -1) {
-                        return reject(); // it found an incorrect tag
+                        return reject(); // etiqueta incorrecta
                     }
                 });
 
                 return resolve();
             })
         } ) 
-    } ).withMessage('You have added incorrect tags.')
+    } ).withMessage('Has añadido etiquetas incorrectas.')
 ], async (req, res, next) => {
     try {
         validationResult(req).throw();
@@ -179,13 +180,13 @@ router.put('/:id', [
 });
 
 /**
- * Delete an ad by _id
+ * Borrar anuncio por ID
  */
 router.delete('/:id', async (req, res, next) => {
     try {
         const _id = req.params.id;
 
-        await Ad.remove( {_id: _id} ).exec();
+        await Anuncio.remove( {_id: _id} ).exec();
 
         res.json( { success: true } );
     } catch(err) {

@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "cross-env NODE_ENV=pro node ./bin/www",
+    "start": "node ./bin/www",
     "dev": "cross-env DEBUG=nodeapi:* PORT=3005 NODE_ENV=dev nodemon ./bin/www",
     "installDB": "node ./init/install_db.js",
     "eslint": "./node_modules/.bin/eslint"

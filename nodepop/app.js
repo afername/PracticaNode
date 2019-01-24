@@ -6,7 +6,7 @@ var logger = require('morgan');
 
 // creo conexión a la BD
 console.log('connection to Mongoose created');
-require('lib/connectMongoose');
+require('./lib/connectMongoose');
 
 // modelos de BD
 require('./models/Anuncio');
@@ -36,12 +36,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 //Variables locales de vistas
-console.log('defino variables locales de vistas');
+/*console.log('defino variables locales de vistas');
 app.locals.titulo = 'NodePop';
 app.locals.config = {
   limitPag: 12;
 };
-
+*/
 
 //rutas de index y users (vistas en front)
 console.log('middleware de llamada a rutas de index y users');
