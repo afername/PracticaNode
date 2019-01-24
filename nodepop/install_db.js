@@ -21,7 +21,7 @@ db.once('open', async () => {
         }
 
         //await initAnuncios();
-        await initModel(Agente, agentesData, 'agentes');
+        await initModel(Anuncio, anunciosData, 'anuncios');
 
         db.close();
 
