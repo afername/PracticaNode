@@ -20,8 +20,8 @@ router.get('/', async (req, res, next) => {
         var data = {};
 
         //paginación
-        var limite = 12;
-        const skip = page*limite;
+        var limit = 12;
+        const skip = page*limit;
 
         //definición de filtro de nombre (contiene)
         if (typeof(name) !== 'undefined'){
@@ -43,12 +43,12 @@ router.get('/', async (req, res, next) => {
         }
 
         //obtener precio máximo
-        const.query = Anuncio.find();
+        const query = Anuncio.find();
         query.sort('-precio');
-        query.limite(1);
+        query.limit(1);
         query.select('precio');
         const max_precio = await query.exec();
-        data.top_precio = max_precio[0].precio;
+        data.top_precio = max_precio[0];
 
         //definición de filtro por precio 
         if( typeof(precio) !== 'undefined' ) {
@@ -82,6 +82,9 @@ router.get('/', async (req, res, next) => {
         }
 
         // cargo docs
+        var docs = await Anuncio.listar(filtro, skip, limit, sort, fields);
+
+        //limito longitud del nombre y convierto tags en string
         docs = docs.map(function(doc){
             if( doc.name.length > nameLengthLimit ) {
                 doc.name = doc.name.substring(0, nameLengthLimit) + '...';
@@ -93,7 +96,7 @@ router.get('/', async (req, res, next) => {
         });
 
         // cargo tags y compruebo si están seleccionadas
-        const tags_docs = await Ad.distinct('tags');
+        const tags_docs = await Anuncio.distinct('tags');
 
         // Convierto las etiquetas en objetos y asigno checks
         data.tags = tags_docs.map(function(tag){

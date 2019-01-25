@@ -36,12 +36,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 //Variables locales de vistas
-/*console.log('defino variables locales de vistas');
-app.locals.titulo = 'NodePop';
+console.log('defino variables locales de vistas');
+app.locals.title = 'NodePop';
 app.locals.config = {
-  limitPag: 12;
+  limitPag: 12
 };
-*/
+
 
 //rutas de index y users (vistas en front)
 console.log('middleware de llamada a rutas de index y users');
