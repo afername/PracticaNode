@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 const { body, validationResult } = require('express-validator/check');
 
-const Ad = require( '../../models/Anuncio' );
+const Anuncio = require( '../../models/Anuncio' );
 
 /**
  * carga los anuncios paginados
@@ -60,7 +60,7 @@ router.get('/', async (req, res, next) => {
         }
 
         // cargo docs
-        const docs = await Ad.list(filtro, skip, limit, sort, fields);
+        const docs = await Anuncio.listar(filtro, skip, limit, sort, fields);
 
         res.json({success: true, data: docs});
     } catch(err) {
@@ -74,7 +74,7 @@ router.get('/', async (req, res, next) => {
  */
 router.get('/tags', async (req, res, next) => {
     try {
-        const docs = await Ad.distinct('tags');
+        const docs = await Anuncio.distinct('tags');
         res.json({success: true, data: docs});
     } catch(err) {
         next(err);
@@ -87,7 +87,7 @@ router.get('/tags', async (req, res, next) => {
  */
 router.get('/max_precio', async (req, res, next) => {
     try {
-        const query = Ad.find();
+        const query = Anuncio.find();
         query.sort('-precio');
         query.limit(1);
         query.select('precio');
@@ -108,7 +108,7 @@ router.post('/', [
     body('venta').optional().isBoolean().withMessage('debe ser true o false'),
     body('tags').custom( value => { // comprobación de etiquetas correctas
         return new Promise( (resolve, reject) => {
-            Ad.distinct('tags', (err, tags) => {
+            Anuncio.distinct('tags', (err, tags) => {
                 const tagsPassed = value.split(/,|\s/);
                 tagsPassed.forEach(tag => {
                     if(tags.indexOf(tag) == -1) {
@@ -128,7 +128,7 @@ router.post('/', [
 
         // Convierto las etiquetas en array antes de insertar en BD
         data.tags = data.tags.split(/,|\s/);
-        const ad = new Anuncio(data);
+        const anuncio = new Anuncio(data);
 
         // Guardo el anuncio en BD
         const doc = await anuncio.save();
@@ -147,7 +147,7 @@ router.put('/:id', [
     body('venta').optional().isBoolean().withMessage('debe ser true o false'),
     body('tags').custom( value => { // comprobar que se pasan etiquetas correctas
         return new Promise( (resolve, reject) => {
-            Ad.distinct('tags', (err, tags) => {
+            Anuncio.distinct('tags', (err, tags) => {
                 const tagsPassed = value.split(/,|\s/);
                 tagsPassed.forEach(tag => {
                     if(tags.indexOf(tag) == -1) {
@@ -168,11 +168,11 @@ router.put('/:id', [
         // Convert tags passed to array before insert into database
         data.tags = data.tags.split(/,|\s/);
         
-        const adUpdated = await Ad.findByIdAndUpdate(_id, data, {
+        const anuncioUpdated = await Anuncio.findByIdAndUpdate(_id, data, {
             new: true
         });
 
-        res.json({success: true, data: adUpdated});
+        res.json({success: true, data: anuncioUpdated});
     } catch(err) {
         next(err);
         return;

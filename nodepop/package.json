@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "cross-env DEBUG=nodeapi:* PORT=3005 NODE_ENV=dev nodemon ./bin/www",
+    "dev": "cross-env DEBUG=nodepop:* PORT=3005 NODE_ENV=dev nodemon ./bin/www",
     "installDB": "./init/install_db.js",
     "eslint": "./node_modules/.bin/eslint"
   },
