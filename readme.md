@@ -1,3 +1,5 @@
+NOTA: la versión publicada el 27/01/2019 tiene un error al cargar las imágenes de la BBDD. Se publicará una versión nueva en cuanto se corrija el problema.
+
 # Ejercicio práctica Módulo Node
 
 API de anuncios de compra/venta desarrollada con NodeJS.
