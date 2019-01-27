@@ -1,8 +1,133 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: rgb(149, 200, 226);
 }
 
 a {
-  color: #00B7FF;
+  color: cornflowerblue;
+}
+
+* {
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+
+section.anuncios-filtro {
+  background-color: rgb(47, 73, 218);
+  border-radius: 10px;
+  margin-bottom: 20px;
+  padding: 10px 30px;
+  color: white;
+}
+
+section.anuncios-filtro .anuncios-filtro--tags__list {
+  list-style: none;
+  padding-left: 0;
+}
+
+section.anuncios-filtro .anuncios-filtro--tags__list li {
+  display: inline-block;
+  margin-left: 30px;
+  padding-top: 6px;
+}
+
+section.anuncios-filtro .anuncios-filtro--item {
+  padding-top: 10px;
+}
+
+section.anuncios-filtro .anuncios-filtro--item__search {
+  padding-top: 15px;
+  padding-top: 10px;
+}
+
+section.anuncios-filtro .anuncios-filtro--item__submit button {
+  width: 100%;
+}
+
+section.anuncios .anuncios--item {
+  background-color: #fff;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  height: 320px;
+  overflow: hidden;
+}
+
+section.anuncios .anuncios--item > .anuncios--item__img {
+  height: 180px;
+  overflow: hidden;
+}
+
+section.anuncios .anuncios--item > .anuncios--item__img img {
+  height: 100%;
+  min-width: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+section.anuncios .anuncios--item > .anuncios--item__text {
+  padding: 10px;
+}
+
+section.anuncios .anuncios--item > .anuncios--item__text > .anuncios--item__text--precio {
+  font-weight: bold;
+  font-size: 1.2rem;
+  padding-bottom: 10px;
+}
+
+.anuncios--item__venta {
+  position: absolute;
+  bottom: 20px;
+  background-color: rgb(122, 212, 183);
+  padding: 5px 20px;
+  color: #fff;
+  border-bottom-left-radius: 10px;
+}}
+
+section.anuncios-filtro .anuncios-filtro--item__submit {
+  padding-top: 10px;
+}
+
+section.anuncios-filtro .anuncios-filtro--item__submit button {
+  width: 100%;
+}
+
+section.anuncios .anuncios--item {
+  background-color: #fff;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  height: 320px;
+  overflow: hidden;
+}
+
+section.anuncios .anuncios--item > .anuncios--item__img {
+  height: 180px;
+  overflow: hidden;
+}
+
+section.anuncios .anuncios--item > .anuncios--item__img img {
+  height: 100%;
+  min-width: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+section.anuncios .anuncios--item > .anuncios--item__text {
+  padding: 10px;
+}
+
+section.anuncios .anuncios--item > .anuncios--item__text > .anuncios--item__text--precio {
+  font-weight: bold;
+  font-size: 1.2rem;
+  padding-bottom: 10px;
+}
+
+.anuncios--item__venta {
+  position: absolute;
+  bottom: 20px;
+  background-color: rgb(122, 212, 183);
+  padding: 5px 20px;
+  color: #fff;
+  border-bottom-left-radius: 10px;
 }

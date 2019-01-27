@@ -4,59 +4,33 @@
  * Creo datos iniciales de la BBDD
  */
 
-const readline = require('readline');
 
-const db = require('./lib/connectMongoose');
-const Anuncio = require('./models/Anuncio');
-const anunciosData = require('./data/anuncios.json');
+const db = require('../lib/connectMongoose');
+const Anuncio = require('../models/Anuncio');
 
 db.once('open', async () => {
-    try{
-        //pregunta de seguridad para evitar borrar la BD al arrancar
-        const respuesta = await askUser('Estás seguro de que quieres que borre TODA la Base de Datos? (no) ');
+    try {
+        // Obtener el JSON de anuncios
+        const data = require('../data/anuncios.json');
+        
+        // Eliminar todos los documentos
+        await Anuncio.deleteMany({}).catch(err => {
+            throw new Error(err);
+        });
+        console.info('Datos de la BD borrados.');
 
-        if (respuesta.toLowerCase() !== 'si'){
-            console.log('Abortado!');
-            process.exit(0);
-        }
+        // Insert documents from JSON
+        await Anuncio.insertMany(data).catch(err => {
+            throw new Error(err);
+        });
+        console.info('Datos insertados a la BD.');
 
-        //await initAnuncios();
-        await initModel(Anuncio, anunciosData, 'anuncios');
         db.close();
-
-    }catch(err){
-        console.log('Hubo un error', err);
-        process.exit(1);
+        console.info('Conexión a BD cerrada.');
+    } catch(err) {
+        console.error('Se ha producido un error en la ejecución del script', err);
+        
+        db.close();
+        console.info('Conexión a BD cerrada.');
     }
 });
-
-
-function askUser(question){
-    return new Promise((resolve, reject) => {
-    const interfaz = readline.createInterface({
-      input: process.stdin,
-      output: process.stdout
-    });
-    interfaz.question(question, answer => {
-      interfaz.close();
-      resolve(answer);
-      return;
-    });
-  });
-}
-
-async function initAnuncios() {
-  const deleted = await Anuncio.deleteMany();
-  console.log(`Eliminados ${deleted.n} anuncios.`);
-
-  const insertados = await Anuncio.insertMany(anunciosData);
-  console.log(`Insertados ${insertados.length} anuncios.`);
-}
-
-async function initModel(Model, data, modelName) {
-  const deleted = await Model.deleteMany();
-  console.log(`Eliminados ${deleted.n} ${modelName}.`);
-
-  const insertados = await Model.insertMany(data);
-  console.log(`Insertados ${insertados.length} ${modelName}.`);
-}

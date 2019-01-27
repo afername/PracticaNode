@@ -85,7 +85,7 @@ router.get('/tags', async (req, res, next) => {
 /**
  * obtengo precio max
  */
-router.get('/max_precio', async (req, res, next) => {
+router.get('../max_precio', async (req, res, next) => {
     try {
         const query = Anuncio.find();
         query.sort('-precio');

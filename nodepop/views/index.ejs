@@ -2,30 +2,30 @@
   <body>
     <h1><%= title %></h1>
     <div class="main">
-      <section class="ads-filter">
-        <form action="" id="ads-filter-form">
+      <section class="anuncios-filtro">
+        <form action="" id="anuncios-filtro-form">
           <div class="row">
               <div class="col-xl-3">
-                <div class="ads-filter--item">
-                  <div class="row ads-filter--item__price">
+                <div class="anuncios-filtro--item">
+                  <div class="row anuncios-filtro--item__precio">
                     <div class="col-6">
-                      <label for="min-price">Precio desde: <span></span></label>
-                      <input type="range" class="custom-range" min="0" max="<%= data.top_price %>" value="<%= data.min_price %>" name="min-price" id="min-price">
+                      <label for="min-precio">Precio desde: <span></span></label>
+                      <input type="range" class="custom-range" min="0" max="<%= data.top_precio %>" value="<%= data.min_precio %>" name="min-precio" id="min-precio">
                     </div>
                     <div class="col-6">
-                      <label for="max-price">Precio hasta: <span></span></label>
-                      <input type="range" class="custom-range" min="0" max="<%= data.top_price %>" value="<%= data.max_price %>" name="max-price" id="max-price">
+                      <label for="max-precio">Precio hasta: <span></span></label>
+                      <input type="range" class="custom-range" min="0" max="<%= data.top_precio %>" value="<%= data.max_precio %>" name="max-precio" id="max-precio">
                     </div>
                   </div>
                 </div>
               </div>
               <div class="col-xl-2">
-                <div class="ads-filter--item">
-                  <div class="ads-filter--item__tags">
+                <div class="anuncios-filtro--item">
+                  <div class="anuncios-filtro--item__tags">
                       Tags:
-                      <ul class="ads-filter--tags__list">
+                      <ul class="anuncios-filtro--tags__list">
                         <% data.tags.forEach( function(tag) { %>
-                          <li class="ads-filter--tags__list--item">
+                          <li class="anuncios-filtro--tags__list--item">
                             <input class="form-check-input" type="checkbox" name="tags[]" value="<%= tag.key %>" <%= tag.checked %>>
                             <label class="form-check-label" for="tags">
                               <%= tag.key %>
@@ -37,18 +37,18 @@
                 </div>
               </div>
               <div class="col-xl-2">
-                <div class="ads-filter--item">
-                    <div class="ads-filter--item__type">
+                <div class="anuncios-filtro--item">
+                    <div class="anuncios-filtro--item__type">
                         Marcado como:
-                        <ul class="ads-filter--tags__list">
-                          <li class="ads-filter--tags__list--item">
-                            <input class="form-check-input" type="radio" name="sale" id="sale" value="true">
+                        <ul class="anuncios-filtro--tags__list">
+                          <li class="anuncios-filtro--tags__list--item">
+                            <input class="form-check-input" type="radio" name="venta" id="venta" value="true">
                             <label class="form-check-label" for="tags-lifestyle">
                               Se vende
                             </label>
                           </li>
-                          <li class="ads-filter--tags__list--item">
-                            <input class="form-check-input" type="radio" name="sale" id="sale" value="false">
+                          <li class="anuncios-filtro--tags__list--item">
+                            <input class="form-check-input" type="radio" name="venta" id="venta" value="false">
                             <label class="form-check-label" for="tags-work">
                               Se busca
                             </label>
@@ -58,8 +58,8 @@
                 </div>
               </div>
               <div class="col-xl-3">
-                <div class="ads-filter--item">
-                    <div class="ads-filter--item__search">
+                <div class="anuncios-filtro--item">
+                    <div class="anuncios-filtro--item__search">
                       <label class="sr-only" for="inlineFormInputGroup">Busca por nombre</label>
                       <div class="input-group mb-2">
                         <div class="input-group-prepend">
@@ -71,33 +71,8 @@
                 </div>
               </div>
               <div class="col-xl-2">
-              </div>
-          </div>
-      </form>
-      </section>
-      <section class="ads">
-        <div class="row">
-          <% anuncios.forEach( function(ad) { %>
-            <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2">
-                <div class="ads--item">
-                    <div class="ads--item__img"><img src="anuncios/<%= ad.img %>" alt="<%= ad.name %>"></div>
-                    <div class="ads--item__text">
-                      <div class="ads--item__text--price"><%= ad.price %> €</div>
-                      <div class="ads--item__text--name"><p><%= ad.name %></p></div>
-                      <div class="ads--item__text--tags"><small>Tags: <%= ad.tags %></small></div>
-                    </div>
-                    <div class="ads--item__sale">
-                      <small><% if(ad.sale) { %> Se vende <% } else { %> Se busca <% } %></small>
-                    </div>
-                </div>
-              </div>
-          <% }); %>
-        </div>
-      </section>
-    </div>
-
-    <% include partials/footer %>                <div class="ads-filter--item">
-                  <div class="ads-filter--item__submit">
+                <div class="anuncios-filtro--item">
+                  <div class="anuncios-filtro--item__submit">
                       <button type="submit" class="btn btn-primary">Filtrar</button>
                   </div>
                 </div>
@@ -105,19 +80,22 @@
           </div>
       </form>
       </section>
-      <section class="ads">
+      <section class="anuncios">
         <div class="row">
-          <% anuncios.forEach( function(ad) { %>
+          <% anuncios.forEach( function(anuncio) { %>
             <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2">
-                <div class="ads--item">
-                    <div class="ads--item__img"><img src="anuncios/<%= ad.img %>" alt="<%= ad.name %>"></div>
-                    <div class="ads--item__text">
-                      <div class="ads--item__text--price"><%= ad.price %> €</div>
-                      <div class="ads--item__text--name"><p><%= ad.name %></p></div>
-                      <div class="ads--item__text--tags"><small>Tags: <%= ad.tags %></small></div>
+                <div class="anuncios--item">
+                    <div class="anuncios--item__img"><img src="../public/anuncios/<%= anuncio.foto %>" alt="<%= "Error cargando imagen" %>"></div>
+                    <div class="anuncios--item__text">
+                      <div class="anuncios--item__text--precio"><%= anuncio.precio %> €</div>
+                      <div class="anuncios--item__text--name"><p><%= anuncio.name %></p></div>
+                      <div class="anuncios--item__text--tags"><small>Tags: <%= anuncio.tags %></small></div>
                     </div>
-                    <div class="ads--item__sale">
-                      <small><% if(ad.sale) { %> Se vende <% } else { %> Se busca <% } %></small>
+                    <div class="anuncios--item__venta">
+                      <small><% if(anuncio.venta) { %> Se vende <% } else { %> Se busca <% } %></small>
+                    </div>
+                    <div>
+                    <p>&nbsp;</p>
                     </div>
                 </div>
               </div>

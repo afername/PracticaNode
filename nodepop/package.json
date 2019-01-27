@@ -1,11 +1,10 @@
 {
   "name": "nodepop",
   "version": "0.0.0",
-  "private": true,
   "scripts": {
     "start": "node ./bin/www",
     "dev": "cross-env DEBUG=nodepop:* PORT=3005 NODE_ENV=dev nodemon ./bin/www",
-    "installDB": "./init/install_db.js",
+    "installDB": "node ./init/install_db.js",
     "eslint": "./node_modules/.bin/eslint"
   },
   "dependencies": {
@@ -17,8 +16,9 @@
     "express": "~4.16.0",
     "express-validator": "^5.3.1",
     "http-errors": "~1.6.2",
-    "mongoose": "^5.4.5",
-    "morgan": "~1.9.0"
+    "mongodb": "^3.1.13",
+    "mongoose": "^5.4.7",
+    "morgan": "~1.9.0",
+    "readline": "^1.3.0"
   }
-  
 }

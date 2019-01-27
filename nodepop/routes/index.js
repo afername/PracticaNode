@@ -24,13 +24,13 @@ router.get('/', async (req, res, next) => {
         const skip = page*limit;
 
         //definición de filtro de nombre (contiene)
-        if (typeof(name) !== 'undefined'){
+        if ( typeof(name) !== 'undefined'){
             filtro.name = new RegExp('^' + name, "i");
             data.name = name;
         }
 
         //definición de filtro por compra/venta (booleana)
-        if (typeof(venta) !== 'undefined'){
+        if ( typeof(venta) !== 'undefined'){
             filtro.venta = venta;
         }
 
@@ -48,7 +48,7 @@ router.get('/', async (req, res, next) => {
         query.limit(1);
         query.select('precio');
         const max_precio = await query.exec();
-        data.top_precio = max_precio[0];
+        data.top_precio = max_precio[0].precio;
 
         //definición de filtro por precio 
         if( typeof(precio) !== 'undefined' ) {
@@ -86,8 +86,8 @@ router.get('/', async (req, res, next) => {
 
         //limito longitud del nombre y convierto tags en string
         docs = docs.map(function(doc){
-            if( doc.name.length > nameLengthLimit ) {
-                doc.name = doc.name.substring(0, nameLengthLimit) + '...';
+            if( doc.name.length > limiteNombre ) {
+                doc.name = doc.name.substring(0, limiteNombre) + '...';
             }
 
             doc.tags = doc.tags.toString();

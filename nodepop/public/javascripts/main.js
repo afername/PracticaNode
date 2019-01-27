@@ -1,21 +1,21 @@
 'use strict';
 
 $(document).ready(function() {
-    $("label[for='min-price'] > span").html( $("#min-price").val() );
-    $("#min-price").change(function(){
-        $("label[for='min-price'] > span").html( $(this).val() );
+    $("label[for='min-precio'] > span").html( $("#min-precio").val() );
+    $("#min-precio").change(function(){
+        $("label[for='min-precio'] > span").html( $(this).val() );
     });
 
-    $("label[for='max-price'] > span").html( $("#max-price").val() );
-    $("#max-price").change(function(){
-        $("label[for='max-price'] > span").html( $(this).val() );
+    $("label[for='max-precio'] > span").html( $("#max-precio").val() );
+    $("#max-precio").change(function(){
+        $("label[for='max-precio'] > span").html( $(this).val() );
     });
 
-    $("#ads-filter-form").submit(function() {
-        var url = '/?price='+$("#min-price").val()+'-'+$("#max-price").val();
+    $("#anuncios-filtro-form").submit(function() {
+        var url = '/?precio='+$("#min-precio").val()+'-'+$("#max-precio").val();
         var tags = $('input[name="tags[]"]:checked');
         var name = $('input[name="name"]').val().trim();
-        var sale = $('input[name="sale"]:checked').val();
+        var venta = $('input[name="venta"]:checked').val();
 
         if( tags.length > 0 ) {
             url += '&tags=';
@@ -30,8 +30,8 @@ $(document).ready(function() {
             });
         }
 
-        if( typeof(sale) !== 'undefined' ) {
-            url += '&sale='+sale;
+        if( typeof(venta) !== 'undefined' ) {
+            url += '&venta='+venta;
         }
 
         if( name.length > 0 ) {

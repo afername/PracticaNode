@@ -1,0 +1,8 @@
+[
+    {"name": "Pack de ski", "venta": true, "precio": 320, "foto": "ski.jpg", "tags": ["lifestyle"]},
+    {"name": "Moto Kawasaki", "venta": true, "precio": 5500, "foto": "moto.jpg", "tags": ["lifestyle", "motor"]},
+    {"name": "Projector", "venta": false, "precio": 800, "foto": "projector.jpg", "tags": ["work"]},
+    {"name": "Macbook PRO", "venta": false, "precio": 1200, "foto": "mac.jpg", "tags": ["lifestyle", "work"]},
+    {"name": "Samsung Galaxy S9", "venta": false, "precio": 700, "foto": "samsung.jpg", "tags": ["lifestyle", "mobile"]},
+    {"name": "Skateboard", "venta": true, "precio": 85, "foto": "skate.jpg", "tags": ["lifestyle"]}
+]
