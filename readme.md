@@ -1,14 +1,17 @@
-#Ejercicio práctica Módulo Node
+# Ejercicio práctica Módulo Node
 
 API de anuncios de compra/venta desarrollada con NodeJS.
 
-##Inicializar el proyecto
+## Inicializar el proyecto
 
+Desde el terminal, una vez situados en la ruta del repositorio clonado o descargado, cambiar a la carpeta de la API:
+```
+cd nodepop
+```
 Instalar dependencias:
 ```
 npm install
 ```
-
 
 Verifica la cadena de conexión a la base de datos en lib/connectMongoose.js
 
